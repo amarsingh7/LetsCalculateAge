@@ -1,46 +1,57 @@
-# AGE_CALCULATR
-Program to calculate exact age of anything.
+# LetsCalculateAge✍
+A C++ Program to calculate exact Age of anything.
 Here is the code!
 
 ________
-
-#include<iostream>
+## Code 💻💡
+```
+/* Author- Amar Singh */
+#include "bits/stdc++.h"
+typedef long long ll;
 using namespace std;
-int days  (int a, int b);
-int months (int a, int b);
-int years  (int a, int b);
+
+void AgeCalc(ll current_date, ll current_month, ll current_year, ll dob, ll dob_month, ll dob_year);
 int main ()
 {
- int current_date ;
- int current_month;
- int current_year;
- int dob;
- int dob_month;
- int dob_year;
- int date;
- int month;
- int year;
- cout<<" Enter Current Date, Current Month, Current Year : ";
- cin>>current_date >>current_month >>current_year;
- cout<<endl;
- cout<<" Enter Your Date of Birth's Day, Date of Birth's Month, Date of Birth's Year : ";
- cin>>dob >>dob_month >>dob_year;
- cout<<endl;
- date = days(current_date,dob);
- month = months(current_month,dob_month);
- year = years(current_year,dob_year);
- cout<<endl<<endl;
- cout<<" Age is : "<<date<<" Days  " <<month<<" Months "<<" and "<<year<<" Years old "<<endl<<endl;
+ ios::sync_with_stdio(false);
+ cin.tie(0); cout.tie(0);
+ 
+ long long current_date, current_month, current_year;
+ long long dob, dob_month, dob_year;
+
+ cout << " Enter Current Date, Current Month, Current Year : ";
+ cin >> current_date >> current_month >> current_year;
+ cout << "\n";
+ cout << " Enter Your Date of Birth's Day, Date of Birth's Month, Date of Birth's Year : ";
+ cin >> dob >> dob_month >> dob_year;
+ cout << "\n";
+
+ AgeCalc( current_date,  current_month, current_year, dob, dob_month,  dob_year);
 }
-int days  (int a , int b)
+
+void AgeCalc(ll current_date, ll current_month, ll current_year, ll dob, ll dob_month, ll dob_year)
 {
- return abs(a-b);
+    int month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    if (dob > current_date) 
+    {
+        current_date = current_date + month[dob_month - 1];
+        current_month = current_month - 1;
+    }
+    if (dob_month > current_month) 
+    {
+        current_year = current_year - 1;
+        current_month = current_month + 12;
+    }
+    ll Fdate = current_date - dob;
+    ll Fmonth = current_month - dob_month;
+    ll Fyear = current_year - dob_year;
+
+    cout << "Present Age- \n Years:" << Fyear << " Months:" << Fmonth << " Days: " << Fdate << "\n";
 }
-int months  (int a , int b)
-{
- return abs(a-b);
-}
-int years  (int a , int b)
-{
- return abs(a-b);
-}
+
+```
+
+That's all!   <br>
+Hoping You liked it.
+
+## Thank You :)
