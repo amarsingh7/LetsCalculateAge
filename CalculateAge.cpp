@@ -1,51 +1,30 @@
-/* आलस्यं हि मनुष्याणां शरीरस्थो महान् रिपुः।
-नास्त्युद्यमसमो बन्धुः कृत्वा यं नावसीदति।। 
-*You are only entitled to the ACTION, 
-.. NEVER to its fruits*.. 
-*You are what you believe in. 
-and You become that which you believe YOU can BECOME..*/
-
-/* Author- Amar Singh */
-
+/* Author: Amar Singh */
 #include "bits/stdc++.h"
-typedef long long ll;
 using namespace std;
+vector<int> months= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-void AgeCalc(ll current_date, ll current_month, ll current_year, ll dob, ll dob_month, ll dob_year);
-int main ()
-{
- ios::sync_with_stdio(false);
- cin.tie(0); cout.tie(0);
- 
- long long current_date, current_month, current_year;
- long long dob, dob_month, dob_year;
+int leapyr(int month, int year){
+    if(month<=2)
+        year--;
+    return year/4 - year/100 + year/400;
+}
+int solve(int date, int month, int year){
+    int n1= year*365 + date;
 
- cout << " Enter Current Date, Current Month, Current Year : ";
- cin >> current_date >> current_month >> current_year;
- cout << "\n";
- cout << " Enter Your Date of Birth's Day, Date of Birth's Month, Date of Birth's Year : ";
- cin >> dob >> dob_month >> dob_year;
- cout << "\n";
+    for(int i=0; i<month-1; i++){
+        n1+= months[i];
+    }
+    n1+= leapyr(month, year);
 
- AgeCalc( current_date,  current_month, current_year, dob, dob_month,  dob_year);
+    return n1;
 }
 
-void AgeCalc(ll current_date, ll current_month, ll current_year, ll dob, ll dob_month, ll dob_year)
-{
-    int month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    if (dob > current_date) 
-    {
-        current_date = current_date + month[dob_month - 1];
-        current_month = current_month - 1;
-    }
-    if (dob_month > current_month) 
-    {
-        current_year = current_year - 1;
-        current_month = current_month + 12;
-    }
-    ll Fdate = current_date - dob;
-    ll Fmonth = current_month - dob_month;
-    ll Fyear = current_year - dob_year;
+int main(){
+    vector<string> d1= {"22","10", "2003"};
+    vector<string> d2= {"08","03", "2024"};
 
-    cout << "Present Age- \n Years:" << Fyear << " Months:" << Fmonth << " Days: " << Fdate << "\n";
+    int n1= solve(stoi(d1[0]), stoi(d1[1]), stoi(d1[2]));
+    int n2= solve(stoi(d2[0]), stoi(d2[1]), stoi(d2[2]));
+
+    cout<< abs(n2-n1);
 }
